@@ -3,6 +3,9 @@ import numpy as np
 
 def prepare_data():
     """
+    Reads the original dataset from AK91 (QOB_tableV.dta) and creates
+    all necessary dummy variables (also interaction terms)
+    Output is a DataFrame with 329'509 observations and 1597 variables.
     """
     url = "https://raw.githubusercontent.com/farbmacher/Teaching_Applications/main/datasets/AK91/QOB_tableV.dta"
 
@@ -28,14 +31,6 @@ def prepare_data():
             for pob in list(POBdummies.columns)[1:]:
                 AK91["QYP_{i1}_{i2}_{i3}".format(i1=str(qob[4:]), i2=str(yob[4:]), i3=str(pob[4:]))] = AK91[qob] * AK91[yob]  * AK91[pob]
 
-    QOB = list(AK91.columns)[66:69]
-    YOB = list(AK91.columns)[57:66]
-    POB = list(AK91.columns)[6:56]
-
-    IQP = list(AK91.columns)[70:220]
-    IQY = list(AK91.columns)[220:247]
-    IQYP= list(AK91.columns)[247:]
-
     # drop categorical variables
     #AK91 = AK91.drop(columns=["QOB", "YOB", "POB",])
     # convert dummy variables from datatype int to bool
@@ -44,3 +39,20 @@ def prepare_data():
     #print("QOB, YOB, POB, QOB+QOB*YOB+QOB*POB, QOB+QOB*YOB+QOB*POB+QOB*YOB*POB")
     len(QOB), len(YOB), len(POB), len(QOB)+len(QOB)*len(YOB)+len(QOB)*len(POB), len(IQYP)+len(IQP)+len(IQY)+len(QOB)
     return AK91
+
+def get_dummy_names():
+    """
+    returns a tupel containing 6 lists of variable names
+    corresponding to all dummy variables for 
+    (QOB, YOB, POB, IQP, IQY, IQYP), facilitating access 
+    to certain groups of dummy variables e.g. all quarter of birth dummies
+    """
+    
+    QOB = list(AK91.columns)[66:69]
+    YOB = list(AK91.columns)[57:66]
+    POB = list(AK91.columns)[6:56]
+
+    IQP = list(AK91.columns)[70:220]
+    IQY = list(AK91.columns)[220:247]
+    IQYP= list(AK91.columns)[247:]
+    return (QOB, YOB, POB, IQP, IQY, IQYP)

@@ -1,1 +1,10 @@
 AE1998.csv	- 	Angrist & Evans 1998: Children and Their Parents' Labor Supply: Evidence from Exogenous Variation in Family Size
+
+
+AK91		- 	Angrist & Krueger 1991: Does Compulsory School Attendance Affect Schooling and Earnings?
+			to load data using Python (Version > 3.5) type the following lines:
+			
+			import sys
+			sys.path.append("https://raw.githubusercontent.com/farbmacher/Teaching_Applications/main/datasets/AK91/")
+			import AK91
+			prepare_data()
