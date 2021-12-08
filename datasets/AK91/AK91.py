@@ -40,7 +40,7 @@ def prepare_data():
     len(QOB), len(YOB), len(POB), len(QOB)+len(QOB)*len(YOB)+len(QOB)*len(POB), len(IQYP)+len(IQP)+len(IQY)+len(QOB)
     return AK91
 
-def get_dummy_names():
+def get_dummy_names(AK91):
     """
     returns a tupel containing 6 lists of variable names
     corresponding to all dummy variables for 
